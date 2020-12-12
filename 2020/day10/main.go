@@ -33,10 +33,13 @@ func adapterArray(adapters []int) int {
 }
 
 func adapterArrayPart2(adapters []int) int {
+	adapters = append([]int{0}, adapters...)
 	sort.Ints(adapters)
+
 	adapterCount := len(adapters)
-	wayCountToTarget := make([]int, adapterCount)
+	wayCountToTarget := make([]int, adapterCount+1)
 	wayCountToTarget[adapterCount-1] = 1
+
 	for i := adapterCount - 2; i >= 0; i-- {
 		for rating := 1; rating <= 3; rating++ {
 			candidateIndex := findCandidateIndex(adapters, i, rating)
