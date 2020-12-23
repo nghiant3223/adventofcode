@@ -55,7 +55,7 @@ func TestPart2(t *testing.T) {
 	for _, tc := range []struct {
 		name string
 		in   []string
-		out  []int
+		out  []string
 	}{
 		{
 			in: []string{
@@ -71,28 +71,31 @@ func TestPart2(t *testing.T) {
 				"15,1,5",
 				"5,14,9",
 			},
-			out: []int{1, 0, 2},
+			out: []string{"row", "class", "seat"},
 		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			rules, _, tickets := prepareInput(tc.in)
 			tickets = discardInvalidTickets(rules, tickets)
 			out := part2(rules, tickets)
-			assert.Equal(t, tc.out, out)
+			assert.Equal(t, len(tc.out), len(out))
+			for i, rule := range out {
+				assert.Equal(t, tc.out[i], rule.Name)
+			}
 		})
 	}
 }
 
-func TestFromInputPart2(t *testing.T) {
+func TestFromInputPart2V2(t *testing.T) {
 	inputFile := "./input.txt"
-	expectedOut := 27870
+	expectedOut := 3173135507987
 
 	lines, err := futil.ReadStringSlice(inputFile)
 	assert.NoError(t, err)
 	rules, myTicket, tickets := prepareInput(lines)
 	tickets = discardInvalidTickets(rules, tickets)
 	order := part2(rules, tickets)
-	out := getResultFromOrder(rules, myTicket, order)
+	out := getAnswerFromOrder(order, myTicket)
 	assert.Equal(t, expectedOut, out)
 
 }
