@@ -70,8 +70,8 @@ func part2(rules []Rule, tickets []Ticket) []Rule {
 	columnPossibleRules := getColumnPossibleRules(rules, tickets)
 	columnVisitedOrder := sortColumnByRuleSpace(columnPossibleRules)
 	ruleOrder := make([]Rule, len(rules))
-	used := make(map[Rule]struct{}, len(rules))
-	successful := backtrack(columnVisitedOrder, currentIndex, columnPossibleRules, ruleOrder, used)
+	usedRule := make(map[Rule]struct{}, len(rules))
+	successful := backtrack(columnVisitedOrder, currentIndex, columnPossibleRules, ruleOrder, usedRule)
 	if !successful {
 		return nil
 	}
@@ -83,13 +83,13 @@ func getColumnPossibleRules(rules []Rule, tickets []Ticket) map[int][]Rule {
 	ticketCount := len(tickets)
 	columnPossibleRules := make(map[int][]Rule)
 	for column := 0; column < columnCount; column++ {
-		fieldOfSameColumn := make([]int, ticketCount)
+		fieldsInColumn := make([]int, ticketCount)
 		for i, ticket := range tickets {
-			fieldOfSameColumn[i] = ticket.Fields[column]
+			fieldsInColumn[i] = ticket.Fields[column]
 		}
 		var possibleRules []Rule
 		for _, rule := range rules {
-			if rule.Validate(fieldOfSameColumn) {
+			if rule.Validate(fieldsInColumn) {
 				possibleRules = append(possibleRules, rule)
 			}
 		}
