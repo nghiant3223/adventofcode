@@ -66,12 +66,11 @@ func part1(rules []Rule, tickets []Ticket) int {
 }
 
 func part2(rules []Rule, tickets []Ticket) []Rule {
-	currentIndex := 0
 	columnRuleSpaces := getColumnRuleSpaces(rules, tickets)
 	columnVisitedOrder := sortColumnByRuleSpace(columnRuleSpaces)
 	ruleOrder := make([]Rule, len(rules))
 	usedRule := make(map[Rule]struct{}, len(rules))
-	successful := backtrack(columnVisitedOrder, currentIndex, columnRuleSpaces, ruleOrder, usedRule)
+	successful := backtrack(columnVisitedOrder, 0, columnRuleSpaces, ruleOrder, usedRule)
 	if !successful {
 		return nil
 	}
