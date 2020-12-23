@@ -1,6 +1,12 @@
 package day16
 
-import "adventofcode/2020/lutil"
+import (
+	"adventofcode/2020/lutil"
+	"regexp"
+)
+
+var ticketPattern = regexp.MustCompile(`(\d+)[,]?`)
+var rulePattern = regexp.MustCompile(`(\w+.*): (\d+)-(\d+) or (\d+)-(\d+)`)
 
 type Rule struct {
 	Name       string

@@ -1,7 +1,6 @@
 package day16
 
 import (
-	"regexp"
 	"sort"
 	"strings"
 )
@@ -11,9 +10,6 @@ const (
 	yourTicketHeader   = "your ticket:"
 	departurePrefix    = "departure"
 )
-
-var ticketPattern = regexp.MustCompile(`(\d+)[,]?`)
-var rulePattern = regexp.MustCompile(`(\w+.*): (\d+)-(\d+) or (\d+)-(\d+)`)
 
 func prepareInput(lines []string) ([]Rule, Ticket, []Ticket) {
 	var rules []Rule
