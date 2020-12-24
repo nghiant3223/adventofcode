@@ -10,7 +10,7 @@ func part1(grid [][]byte) int {
 	for changeCount != 0 {
 		target, changeCount = applyRules(target)
 	}
-	return getOccupiedSeatCount(target)
+	return countOccupiedSeat(target)
 }
 
 func applyRules(initial [][]byte) ([][]byte, int) {
@@ -21,7 +21,7 @@ func applyRules(initial [][]byte) ([][]byte, int) {
 	}
 	for i, line := range initial {
 		for j := range line {
-			adjacentOccupiedSeatCount := getAdjacentOccupiedSeatCount(initial, i, j)
+			adjacentOccupiedSeatCount := countOccupiedAdjacentSeat(initial, i, j)
 			if initial[i][j] == empty && adjacentOccupiedSeatCount == 0 {
 				result[i][j] = occupied
 				changeCount++
@@ -36,7 +36,7 @@ func applyRules(initial [][]byte) ([][]byte, int) {
 	return result, changeCount
 }
 
-func getAdjacentOccupiedSeatCount(grid [][]byte, i, j int) int {
+func countOccupiedAdjacentSeat(grid [][]byte, i, j int) int {
 	count := 0
 	height := len(grid)
 	width := len(grid[0])
@@ -56,7 +56,7 @@ func getAdjacentOccupiedSeatCount(grid [][]byte, i, j int) int {
 	return count
 }
 
-func getOccupiedSeatCount(grid [][]byte) int {
+func countOccupiedSeat(grid [][]byte) int {
 	count := 0
 	for i, line := range grid {
 		for j := range line {
