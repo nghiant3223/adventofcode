@@ -97,5 +97,4 @@ func TestFromInputPart2V2(t *testing.T) {
 	order := part2(rules, tickets)
 	out := getAnswerFromOrder(order, myTicket)
 	assert.Equal(t, expectedOut, out)
-
 }
