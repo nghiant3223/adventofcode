@@ -139,7 +139,7 @@ func TestPart1(t *testing.T) {
 		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			out := part1(tc.in)
+			out := part12(tc.in)
 			assert.Equal(t, tc.out, out)
 		})
 	}
@@ -151,7 +151,7 @@ func TestFromInputPart1(t *testing.T) {
 
 	lines, err := futil.ReadStringSlice(inputFile)
 	assert.NoError(t, err)
-	out := part1(lines)
+	out := part12(lines)
 	assert.Equal(t, expectedOut, out)
 }
 
@@ -161,6 +161,6 @@ func TestFromInputPart2(t *testing.T) {
 
 	lines, err := futil.ReadStringSlice(inputFile)
 	assert.NoError(t, err)
-	out := part1(lines)
+	out := part12(lines)
 	assert.Equal(t, expectedOut, out)
 }
